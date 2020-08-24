@@ -554,7 +554,7 @@ f1 = None # type: Callable[[A], A]
 f2 = None # type: Callable[[A, A], A]
 a = None # type: A
 
-A(a)   # E: Too few arguments for "A"
+A(a)   # E: Missing positional argument "b" in call to "A"
 if int():
     f1 = A # E: Incompatible types in assignment (expression has type "Type[A]", variable has type "Callable[[A], A]")
 

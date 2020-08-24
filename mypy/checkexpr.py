@@ -1322,7 +1322,7 @@ class ExpressionChecker(ExpressionVisitor[Type]):
                                           not is_unexpected_arg_error):
                 # No actual for a mandatory positional formal.
                 if messages:
-                    messages.too_few_arguments(callee, context, actual_names)
+                    messages.too_few_arguments(callee, context, actual_names, actual_kinds)
                 ok = False
             elif kind == nodes.ARG_NAMED and (not formal_to_actual[i] and
                                               not is_unexpected_arg_error):

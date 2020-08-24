@@ -2578,3 +2578,22 @@ def foo() -> None:
     pass
 
 reveal_type(foo()) # N: Revealed type is 'None'
+
+[case testTooFewArgumentFunction]
+   
+
+a = None # type: A
+b = None # type: B
+c = None # type: C
+cc = None # type: CC
+
+
+f(*(a, b))    # E: Too few arguments for "f"
+
+def f(a: 'A', b: 'B', c: 'C') -> None: pass
+
+class A: pass
+class B: pass
+class C: pass
+class CC(C): pass
+[builtins fixtures/tuple.pyi]

@@ -589,9 +589,12 @@ class MessageBuilder:
             index_str, base_str, expected_str), context, code=code)
 
     def too_few_arguments(self, callee: CallableType, context: Context,
-                          argument_names: Optional[Sequence[Optional[str]]]) -> None:
-        if (argument_names is not None and not all(k is None for k in argument_names)
-                and len(argument_names) >= 1):
+                          argument_names: Optional[Sequence[Optional[str]]],
+                          actual_kinds: List[int]) -> None:
+        if (argument_names is not None
+                and len(argument_names) >= 1
+                and not any(kind == ARG_STAR or kind == ARG_STAR2 for kind in actual_kinds)
+                and not all(arg is None for arg in callee.arg_names)):
             num_positional_args = sum(k is None for k in argument_names)
             arguments_left = callee.arg_names[num_positional_args:callee.min_args]
             diff = [k for k in arguments_left if k not in argument_names]
